@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue中的样式绑定</title>
+        <script src="./../vue.js"></script>
+        <style>
+            .activated{
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 点击实现改字体颜色  -->
+        <div id="root">
+            <!-- 1. class对象绑定 即  :class="{activated: isActivated}"-->
+            <!-- 2. :class="[activated]" [activated]表示去取的值 -->
+            <div @click="handleDivClick" 
+                 :class="[activated]"
+            >
+            Hello world
+            </div>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#root',
+                data: {
+                   // 1.isActivated: false
+                   activated: ''
+                },
+                methods: {
+                    handleDivClick: function() {
+                         /* this.isActivated = true; */
+                         //实现颜色互相转化
+                         //1.this.isActivated = !this.isActivated;
+                        //  //2_1
+                        //  if(this.activated === "activated"){
+                        //     this.activated= "";
+                        //  }else{
+                        //     this.activated= "activated";
+                        //  }
+                         //2_2
+                         this.activated = this.activated === "activated" ? "" : "activated";
+                        
+                    }
+                },
+            })
+        </script>
+    </body>
+
+</html>
+

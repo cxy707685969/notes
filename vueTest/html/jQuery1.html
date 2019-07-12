@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList Jquery</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="./../vue.js"></script>
+    <script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    面向对象jQuery代码（mvp）
+
+    <div >
+        <input type="text" id="input"/>
+        <button id="btn">提交</button>
+        <ul id="list">
+        </ul>
+
+    </div>
+
+
+    <script>
+        function Page() {
+
+        }
+
+        $.extend(Page.prototype, {
+            init: function () {
+                console.log('1')
+                this.bindEvents()
+            },
+            bindEvents: function () {
+                var btn = $('#btn');
+                btn.on('click', $.proxy(this.handleBtnClick, this))
+            },
+            handleBtnClick: function () {
+                var inputElem = $ ('#input');
+                var inputValue = inputElem.val();
+                var ulElem = $ ('#list');
+                ulElem.append('<li>'+ inputValue + '</li>');
+                inputElem.val('');
+            }
+        })
+
+        var page=new Page();
+        page.init();
+    </script>
+
+</body>
+
+</html>

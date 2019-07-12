@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>TodoList</title>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+        <script src="./../vue.js"></script>
+    </head>
+    <body>
+        <!-- <div id="app">
+            <input type="text"/>
+            <button>提交</button>
+            <ul>
+                <li>第一课的内容/li>
+                <li>第二课的内容</li>
+            </ul>
+        </div> -->
+
+        <!-- <div id="app">
+            <input type="text" v-model="inputValue"/>
+            <button v-on:click="handleBtnClick">提交</button>
+            <ul>
+                <li v-for="item in list">{{item}}</li>
+            </ul>
+
+        </div>
+
+
+        <script>
+            var app=new Vue({
+                el:'#app',
+                data:{
+                    list:['第一课的内容','第二课的内容'],
+                    inputValue:''
+                },
+                methods: {
+                    handleBtnClick:function(){
+                        // this.list[0] = this.inputValue
+                        this.list.push(this.inputValue)
+                        this.inputValue = ''
+                    }
+                }
+            })
+        </script> -->
+
+
+    前端组件化实现todoList
+    <div id="app">
+        <input type="text" v-model="inputValue"/>
+        <button @click="handleBtnClick">提交</button>
+        <ul>
+            <todo-item v-bind:content="item" 
+                       v-bind:index="index"
+                       v-for="(item, index) in list"
+                       @delete="handleItemDelete"
+            ></todo-item>
+        </ul>
+    </div>
+
+    <script>
+        // 局部组件的使用：
+        // $emit-->向外触发事件
+        var TodoItem = {
+            props : ['content','index'], //props-->接收外面传过来的数据
+            template:"<li @click='handleItemClick'>{{content}}</li>",
+            methods: {
+                handleItemClick: function() {
+                    this.$emit("delete",this.index)
+                }
+            },
+        }
+        //父组件实际上是vue实例
+        var app=new Vue({
+            el:'#app',
+            //使用局部组件时，需要将其注册在Vue实例中
+            components:{
+                TodoItem:TodoItem
+            },
+            data:{
+                list:[],
+                inputValue:''
+            },
+            methods: {
+                handleBtnClick:function(){
+                    // this.list[0] = this.inputValue
+                    this.list.push(this.inputValue)
+                    this.inputValue = ''
+                },
+                handleItemDelete: function(index) {
+                    //alert("delete")
+                    //splice(index,1):从下标为index开始删除一项
+                    this.list.splice(index,1)
+                }
+            }
+        })
+    </script>
+    </body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>模板语法</title>
+        <script src="./../vue.js"></script>
+    </head>
+    <body>
+        <div id="root">
+            <div>{{name + ' world'}}</div>
+            <div v-text="name + ' world'"></div>
+            <div v-html="name + ' world'" ></div>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#root',
+                data: {
+                    name: '<h1>hello</h1>'
+                },
+                methods: {
+                    handleClick: function(){
+                        alert("hello")
+                    }
+                }
+            })
+        </script>
+    </body>
+
+</html>
+
+
+
