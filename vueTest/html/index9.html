@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue中的列表渲染</title>
+        <script src="./../vue.js"></script>
+    </head>
+    <body>
+        <div id="root">
+            <!--2.对象内容循环-->
+            <!--(item,key,index)  item:对象中的键值(属性值) ; key:对象中的键名(属性名) index:该属性在对象中的第几个位置-->
+            <!-- <div v-for="(item,key,index) of userInfo">
+                {{item}} ----{{key}} ----{{index}}
+            </div> -->
+            <div v-for="(item,index) of list">
+                    {{item}} ---{{index}}
+            </div>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#root',
+                data:{
+                    userInfo: {
+                        name:"Astrid",
+                        age: 21,
+                        gender: "female",
+                        salary: "secret"
+                    },
+                    list:[{
+                        id:'0001',
+                        text:'hello'
+                    }, {
+                        id:'0002',
+                        text:'nice'
+                    }, {
+                        id:'0003',
+                        text:'good'
+                    } 
+                    ]
+                }
+            })
+        </script>
+    </body>
+
+</html>
+

@@ -14,11 +14,14 @@
         <!-- 点击实现改字体颜色  -->
         <div id="root">
             <!-- 1. class对象绑定 即  :class="{activated: isActivated}"-->
-            <!-- 2. :class="[activated]" [activated]表示去取的值 -->
-            <div @click="handleDivClick" 
-                 :class="[activated]"
-            >
-            Hello world
+            <!-- 2. class数组绑定  :class="[activated]" activated:为数组中的一个变量,数组中可以有多个变量 [activated]表示去取的值,,此时 :class="activated-One" -->
+            <!-- 1或2<div @click="handleDivClick" 
+                 :class="[activated, activatedOne]"
+            > -->
+            <!-- 3.style对象绑定 即:style="styleObj"-->
+            <!-- 4.style数组绑定 即:style="[styleObj,{fontSize:'20px'}]" -->
+            <div :style="[styleObj,{fontSize:'20px'}]" @Click="handleDivClick">
+              Hello world
             </div>
         </div>
 
@@ -26,8 +29,13 @@
             var vm = new Vue({
                 el: '#root',
                 data: {
-                   // 1.isActivated: false
-                   activated: ''
+                   //1.isActivated: false
+                   //2.activated: '',
+                   //2.activatedOne: 'activated-One'
+                   //3.
+                   styleObj:{
+                       color: "black",
+                   }
                 },
                 methods: {
                     handleDivClick: function() {
@@ -41,8 +49,9 @@
                         //     this.activated= "activated";
                         //  }
                          //2_2
-                         this.activated = this.activated === "activated" ? "" : "activated";
-                        
+                         //this.activated = this.activated === "activated" ? "" : "activated";     
+                         //3
+                         this.styleObj.color = this.styleObj.color === "black" ? "red" : "black" ;
                     }
                 },
             })
