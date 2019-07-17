@@ -1,44 +1,75 @@
 <template>
-  <div>
-    <el-form class="department-management-from" ref="form" :model="form" label-width="140px">
-      <el-form-item label="departmentCode">
-        <el-input v-model="departmentCode"></el-input>
-      </el-form-item>
-      <el-form-item label="description">
-        <el-input v-model="description"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSearch">Search</el-button>
-        <el-button @click="onReset">Reset</el-button>
-      </el-form-item>
-    </el-form>
+  <div :class='formStyle'>
+    <el-row class='search-form'>
+      <el-row class='search-form-item' :gutter='20'>
+        <el-col class='search-l' :span='7'><span class='search-label'>Department Code:</span><span class='star'>*</span></el-col>
+        <el-col :span='13'><el-input size='mini' v-model='form.departmentCode' @input='handleDepartmentCodeChanged'></el-input></el-col>
+      </el-row>
+      <el-row class='search-form-item' :gutter='20'>
+        <el-col class='search-l' :span='7'><span class='search-label'>Description:</span><span class='star'>*</span></el-col>
+        <el-col :span='13'><el-input size='mini' v-model='form.description' @input='handleDescriptionChanged'></el-input></el-col>
+      </el-row>
+    </el-row>
   </div>
 </template>
 
 <script>
 export default {
   name: 'DepartmentManagementForm',
+  props: {
+    formStyle: String,
+    formData: Object,
+  },
   data () {
     return {
-      departmentCode: '',
-      description: '',
+      form: this.formData,
     };
   },
   methods: {
-    onSearch () {
-
+    handleDepartmentCodeChanged () {
+      this.$emit('handleDepartmentCodeChanged', this.form.departmentCode);
     },
-    onReset () {
-      this.departmentCode = '';
-      this.description = '';
-    }
+    handleDescriptionChanged () {
+      this.$emit('handleDescriptionChanged', this.form.description);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-  .department-management-from {
-    width: 40%;
-    margin: 0 auto;
+.department-management-from {
+  margin-top: 10px;
+  font-size: 12px;
+  width: 30%;
+  .search-form {
+    margin-bottom: 20px;
+    .search-form-item {
+      margin-top: 10px;
+      .search-l {
+        text-align: left;
+        margin-left: 10px;
+        .search-label {
+          line-height: 28px;
+          font-weight: 600;
+          color: #606266;
+        }
+      }
+    }
+    .item-top {
+      margin-top: 20px;
+    }
   }
+}
+.size-max {
+  width: 100%;
+  .search-form {
+    .search-form-item {
+      .search-l {
+        .search-label {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
 </style>
